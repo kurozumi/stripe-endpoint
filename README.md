@@ -18,6 +18,17 @@ composer require stripe/stripe-php
 STRIPE_SIGNING_SECRET=whsec_t6KFvU8...
 ```
 
+## プラグインをインストール
+
+StripeEndpointプラグインをEC-CUBE4にインストール・有効化してください。
+
+```bash
+cd app/Plugin
+git clone git@github.com:kurozumi/StripeEndpoint.git
+bin/console e:p:i --code StripeEndpoint
+bin/console e:p:e --code StripeEndpoint
+```
+
 ## エンドポイント
 
 下記のエンドポイントをStripeのWebhookに登録してください。
