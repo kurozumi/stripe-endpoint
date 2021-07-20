@@ -23,8 +23,7 @@ STRIPE_SIGNING_SECRET=whsec_t6KFvU8...
 StripeEndpointプラグインをEC-CUBE4にインストール・有効化してください。
 
 ```bash
-cd app/Plugin
-git clone git@github.com:kurozumi/StripeEndpoint.git
+git clone git@github.com:kurozumi/StripeEndpoint.git app/Plugin
 bin/console e:p:i --code StripeEndpoint
 bin/console e:p:e --code StripeEndpoint
 ```
