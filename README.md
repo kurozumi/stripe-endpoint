@@ -36,7 +36,7 @@ bin/console e:p:e --code StripeEndpoint
 https://my-domain/stripe/webhook/endpoint
 ```
 
-## 支払いが完了したときや定期支払いがキャンセルされたときに何かする処理を実装する方法
+## 定期支払いが成功したり失敗した場合に何かする処理の実装方法
 
 ```php
 <?php
@@ -44,9 +44,9 @@ namespace Customize\EventListener;
 
 
 use Plugin\StripeEndpoint\Event\StripeEvent;
+use Stripe\Checkout\Session;
 use Stripe\Event;
-use Stripe\PaymentIntent;
-use Stripe\Subscription;
+use Stripe\Invoice;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class StripeEventListener implements EventSubscriberInterface
@@ -54,31 +54,43 @@ class StripeEventListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            Event::PAYMENT_INTENT_SUCCEEDED => ['onPaymentIntentSucceeded'],
-            Event::CUSTOMER_SUBSCRIPTION_DELETED => ['onCustomerSubscriptionDeleted']
+            Event::CHECKOUT_SESSION_COMPLETED => ['onCheckoutSessionCompleted'],
+            Event::INVOICE_PAID => ['onInvoicePaid'],
+            Event::INVOICE_PAYMENT_FAILED => ['onInvoicePaymentFailed']
         ];
     }
 
     /**
-     * 支払いが完了したときに何かする
+     * 顧客が「支払う」または「登録」ボタンをクリックしたときに何かする
      *
      * @param StripeEvent $event
      */
-    public function onPaymentIntentSucceeded(StripeEvent $event)
+    public function onCheckoutSessionCompleted(StripeEvent $event)
     {
-        /** @var PaymentIntent $paymentIntent */
-        $paymentIntent = $event->getResource();
+        /** @var Session $session */
+        $session = $event->getResource();
     }
 
     /**
-     * 定期支払がキャンセルされたときに何かする
+     * 支払いが成功した場合に何かする
      *
      * @param StripeEvent $event
      */
-    public function onCustomerSubscriptionDeleted(StripeEvent $event)
+    public function onInvoicePaid(StripeEvent $event)
     {
-        /** @var Subscription $subscriptions */
-        $subscription = $event->getResource();
+        /** @var Invoice $invoice */
+        $invoice = $event->getResource();
+    }
+
+    /**
+     * 顧客の支払い方法に問題があった場合に何かする
+     *
+     * @param StripeEvent $event
+     */
+    public function onInvoicePaymentFailed(StripeEvent $event)
+    {
+        /** @var Invoice $invoice */
+        $invoice = $event->getResource();
     }
 }
 
