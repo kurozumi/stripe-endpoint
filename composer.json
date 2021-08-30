@@ -1,10 +1,10 @@
 {
-    "name": "ec-cube/StripeEndpoint",
-    "version": "1.0.0",
+    "name": "ec-cube/stripeendpoint",
+    "version": "2.0.0",
     "description": "Stripeエンドポイント for EC-CUBE4",
     "type": "eccube-plugin",
     "require": {
-        "ec-cube/plugin-installer": "~0.0.7",
+        "ec-cube/plugin-installer": "~0.0.6 || ^2.0",
         "stripe/stripe-php": "*"
     },
     "extra": {
