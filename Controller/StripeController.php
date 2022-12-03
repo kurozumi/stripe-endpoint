@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of StripeEndpoint
  *
@@ -12,7 +13,6 @@
 
 namespace Plugin\StripeEndpoint\Controller;
 
-
 use Eccube\Controller\AbstractController;
 use Plugin\StripeEndpoint\Event\StripeEvent;
 use Stripe\Exception\SignatureVerificationException;
@@ -24,7 +24,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class StripeController
- * @package Plugin\StripeEndpoint\Controller
  *
  * @Route("/stripe")
  */
@@ -32,6 +31,7 @@ class StripeController extends AbstractController
 {
     /**
      * @param Request $request
+     *
      * @return Response
      *
      * @Route("/webhook/endpoint", name="stripe_webhook_endpoint")

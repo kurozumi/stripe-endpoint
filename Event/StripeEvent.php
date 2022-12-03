@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of StripeEndpoint
  *
@@ -12,17 +13,17 @@
 
 namespace Plugin\StripeEndpoint\Event;
 
-
 use Stripe\ApiResource;
 use Stripe\Event;
-use Symfony\Component\EventDispatcher\Event as BaseEvent;
 
-class StripeEvent extends BaseEvent
+class StripeEvent extends \Symfony\Contracts\EventDispatcher\Event
 {
+    /**
+     * @var Event
+     */
     protected $event;
 
     /**
-     * StripeEvent constructor.
      * @param Event $event
      */
     public function __construct(Event $event)

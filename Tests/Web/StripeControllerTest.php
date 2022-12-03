@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of StripeEndpoint
  *
@@ -16,16 +17,6 @@ use Eccube\Tests\Web\AbstractWebTestCase;
 
 class StripeControllerTest extends AbstractWebTestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-    }
-
     public function testルーティングテスト()
     {
         self::markTestIncomplete();
